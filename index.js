@@ -111,7 +111,7 @@ function render(time) {
   //     }
   //   }
   // }
-  mover();
+
   resizeUpdate();
   if (orientationControls) orientationControls.update();
   cam.update();

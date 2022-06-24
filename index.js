@@ -2,7 +2,7 @@ import * as THREE from "https://unpkg.com/three@0.122.0/build/three.module.js";
 // import { lista } from "./lista.js";
 import { texto } from "./texto.js";
 import { cargarModelo } from "./CargarModelo.js";
-import { Particula } from "./Particula.js";
+// import { Particula } from "./Particula.js";
 let d = 60;
 var poss = [
   new THREE.Vector2(0, 0),

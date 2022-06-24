@@ -21,7 +21,6 @@ let limiteExterno = 40;
 let limiteColision = 4;
 let tamPanuelo = 6;
 let cant = 20;
-console.log(lista);
 console.log(texto);
 
 function isMobile() {

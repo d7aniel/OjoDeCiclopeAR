@@ -40,7 +40,7 @@ if (isMobile()) {
   orientationControls = new THREEx.DeviceOrientationControls(camera);
 }
 
-const oneDegAsRad = THREE.Math.degToRad(1);
+const oneDegAsRad = THREE.MathUtils.degToRad(1);
 // let fake = null;
 let first = true;
 
@@ -160,9 +160,9 @@ function setupObjects(longitude, latitude) {
     // texto.setSubtitulo(t);
     texto.remove();
   }
-  cargarModelo("./modelo/ventana_mercela_alfa1.glb", puerta);
+  cargarModelo("./modelo/ventana_mercela_alfa5.glb", puerta);
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
-  puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
+  // puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
 
   let objeto = new THREE.Object3D();
   // for (let i = 0; i < poss.length; i++) {

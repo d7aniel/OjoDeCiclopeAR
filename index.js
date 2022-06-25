@@ -235,7 +235,7 @@ function setupObjects(longitude, latitude) {
   //     indice = i;
   //   }
   // },
-  threex.add(objeto, -57.96936, -34.90338); // slightly north
+  threex.add(objeto, -58.278938, -37.89719); // slightly north
   // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   // const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   // const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });

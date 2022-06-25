@@ -16,11 +16,7 @@ var poss = [
   new THREE.Vector2(0, d),
 ];
 
-let limiteInterno = 15;
-let limiteExterno = 40;
-let limiteColision = 4;
-let tamPanuelo = 6;
-let cant = 20;
+let tamPanuelo = 12;
 console.log(texto);
 
 function isMobile() {
@@ -166,6 +162,7 @@ function setupObjects(longitude, latitude) {
   }
   cargarModelo("./modelo/ventana_mercela_alfa1.glb", puerta);
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
+  puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, tamPpuerta.rotationanuelo.z);
 
   let objeto = new THREE.Object3D();
   // for (let i = 0; i < poss.length; i++) {

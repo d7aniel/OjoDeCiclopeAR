@@ -162,7 +162,7 @@ function setupObjects(longitude, latitude) {
   }
   cargarModelo("./modelo/ventana_mercela_alfa1.glb", puerta);
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
-  puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, tamPpuerta.rotationanuelo.z);
+  puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
 
   let objeto = new THREE.Object3D();
   // for (let i = 0; i < poss.length; i++) {

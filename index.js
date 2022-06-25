@@ -160,7 +160,7 @@ function setupObjects(longitude, latitude) {
     // texto.setSubtitulo(t);
     texto.remove();
   }
-  cargarModelo("./modelo/ventana_mercela_alfa5.glb", puerta);
+  cargarModelo("./modelo/ventana_mercela_alfa6.glb", puerta);
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
   // puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
 

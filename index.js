@@ -29,12 +29,17 @@ function isMobile() {
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(80, 2, 0.1, 50000);
-const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector("#canvas1") });
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector("#canvas1"),
+  preserveDrawingBuffer: true,
+});
 const geom = new THREE.BoxGeometry(1, 1, 1);
 const threex = new THREEx.LocationBased(scene, camera);
 // You can change the minimum GPS accuracy needed to register a position - by default 1000m
 //const threex = new THREEx.LocationBased(scene, camera. { gpsMinAccuracy: 30 } );
 const cam = new THREEx.WebcamRenderer(renderer, "#video1");
+
+iluminarConFoto("./hdr/fondoRedu.png", false);
 let orientationControls;
 if (isMobile()) {
   orientationControls = new THREEx.DeviceOrientationControls(camera);
@@ -151,6 +156,8 @@ function resizeUpdate() {
 
 // let particulas = [];
 let puerta = new THREE.Object3D();
+let cuenta = 0;
+let lista = ["./modelo/ventana_mercela_alfa6.glb", "./modelo/piedraArribav3.glb"];
 function setupObjects(longitude, latitude) {
   // Use position of first GPS update (fake or real)
   if (first) {
@@ -160,7 +167,8 @@ function setupObjects(longitude, latitude) {
     // texto.setSubtitulo(t);
     texto.remove();
   }
-  cargarModelo("./modelo/ventana_mercela_alfa6.glb", puerta);
+
+  cargarModelo(lista[cuenta], puerta);
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
   // puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
 
@@ -182,43 +190,43 @@ function setupObjects(longitude, latitude) {
   //   objeto.add(punto2);
   // }
 
-  for (let i = 0; i < 360; i += 60) {
-    let luz1 = new THREE.PointLight(0xffffff, 4, 35);
-    let luz2 = new THREE.PointLight(0xffffff, 4, 35);
-    let luz3 = new THREE.PointLight(0xffffff, 4, 35);
-    let luz4 = new THREE.PointLight(0xffffff, 4, 35);
-    let x = 60 * Math.cos(THREE.MathUtils.degToRad(i));
-    let y = 60 * Math.sin(THREE.MathUtils.degToRad(i));
-    let x2 = 30 * Math.cos(THREE.MathUtils.degToRad(i));
-    let y2 = 30 * Math.sin(THREE.MathUtils.degToRad(i));
-    // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    // const material2 = new THREE.MeshBasicMaterial({ color: 0xff00ff });
-    luz1.position.set(x, 30, y);
-    luz2.position.set(x, -30, y);
-    luz3.position.set(x2, 30, y2);
-    luz4.position.set(x2, -30, y2);
-    // let punto = new THREE.Mesh(geom, material);
-    // let punto2 = new THREE.Mesh(geom, material2);
-    // let punto3 = new THREE.Mesh(geom, material2);
-    // let punto4 = new THREE.Mesh(geom, material);
-    // punto.position.set(x, 30, y);
-    // punto2.position.set(x, -30, y);
-    // punto3.position.set(x2, 30, y2);
-    // punto4.position.set(x2, -30, y2);
-    objeto.add(luz1);
-    objeto.add(luz2);
-    objeto.add(luz3);
-    objeto.add(luz4);
-    // objeto.add(punto);
-    // objeto.add(punto2);
-    // objeto.add(punto3);
-    // objeto.add(punto4);
-  }
+  // for (let i = 0; i < 360; i += 60) {
+  //   let luz1 = new THREE.PointLight(0xffffff, 4, 35);
+  //   let luz2 = new THREE.PointLight(0xffffff, 4, 35);
+  //   let luz3 = new THREE.PointLight(0xffffff, 4, 35);
+  //   let luz4 = new THREE.PointLight(0xffffff, 4, 35);
+  //   let x = 60 * Math.cos(THREE.MathUtils.degToRad(i));
+  //   let y = 60 * Math.sin(THREE.MathUtils.degToRad(i));
+  //   let x2 = 30 * Math.cos(THREE.MathUtils.degToRad(i));
+  //   let y2 = 30 * Math.sin(THREE.MathUtils.degToRad(i));
+  //   // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  //   // const material2 = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+  //   luz1.position.set(x, 30, y);
+  //   luz2.position.set(x, -30, y);
+  //   luz3.position.set(x2, 30, y2);
+  //   luz4.position.set(x2, -30, y2);
+  //   // let punto = new THREE.Mesh(geom, material);
+  //   // let punto2 = new THREE.Mesh(geom, material2);
+  //   // let punto3 = new THREE.Mesh(geom, material2);
+  //   // let punto4 = new THREE.Mesh(geom, material);
+  //   // punto.position.set(x, 30, y);
+  //   // punto2.position.set(x, -30, y);
+  //   // punto3.position.set(x2, 30, y2);
+  //   // punto4.position.set(x2, -30, y2);
+  //   objeto.add(luz1);
+  //   objeto.add(luz2);
+  //   objeto.add(luz3);
+  //   objeto.add(luz4);
+  //   // objeto.add(punto);
+  //   // objeto.add(punto2);
+  //   // objeto.add(punto3);
+  //   // objeto.add(punto4);
+  // }
 
-  // const light = new THREE.AmbientLight(0x909090); // soft white light
-  // objeto.add(light);
-  const lightHemi = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.8);
-  objeto.add(lightHemi);
+  // // const light = new THREE.AmbientLight(0x909090); // soft white light
+  // // objeto.add(light);
+  // const lightHemi = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.8);
+  // objeto.add(lightHemi);
   // let cant = 10;
   // for (let i = 0; i < cant; i++) {
   //   particulas[i] = new Particula();
@@ -236,6 +244,7 @@ function setupObjects(longitude, latitude) {
   //   }
   // },
   threex.add(objeto, -58.278938, -37.89719); // slightly north
+  threex.add(objeto, -57.969982, -34.902403); // slightly north
   // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   // const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   // const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
@@ -244,3 +253,104 @@ function setupObjects(longitude, latitude) {
   // threex.add(new THREE.Mesh(geom, material3), -58.004916, -34.887014); // slightly west
   // threex.add(new THREE.Mesh(geom, material4), longitude + 0.001, latitude); // slightly east
 }
+
+// var download = function () {
+//   var link = document.createElement("a");
+//   link.download = "filename.png";
+//   link.href = document.getElementById("canvas").toDataURL();
+//   link.click();
+// };
+
+function crearActualizacion() {
+  // console.log("creandoooo");
+  let a = document.createElement("a");
+  a.style.position = "absolute";
+  a.style.top = "40";
+  a.style.display = "flex";
+  a.style.justifyContent = "center";
+  a.style.bottom = "80px";
+  a.style.transform = "absolute";
+  a.style.width = "100%";
+  a.id = "download";
+  let btn = document.createElement("button");
+  btn.type = "button";
+  btn.innerText = "Actualizar";
+  btn.addEventListener("click", actualizar);
+
+  let btn2 = document.createElement("button");
+  btn2.type = "button";
+  btn2.innerText = "Aumentar";
+  btn2.addEventListener("click", aumentarTam);
+
+  let btn3 = document.createElement("button");
+  btn3.type = "button";
+  btn3.innerText = "Reducir";
+  btn3.addEventListener("click", reducirTam);
+
+  // .onClick = () => {
+  //   console.log("asdasdasd");
+  // };
+
+  a.append(btn);
+  a.append(btn2);
+  a.append(btn3);
+  document.body.append(a);
+
+  // <a
+  //   style="position: absolute;position: absolute; top: 40;
+  // display: flex; justify-content: center; bottom: 40px;
+  //  width: 100%;"
+  //   id="download"
+  //   download="triangle.png"
+  // >
+  //   <button type="button" onClick="download()">
+  //     Download
+  //   </button>
+  // </a>;
+}
+
+function iluminarConFoto(archivo) {
+  let iluminador = new THREE.PMREMGenerator(renderer);
+  iluminador.compileEquirectangularShader();
+  let escena = scene;
+  new THREE.TextureLoader().load(archivo, function (texture) {
+    var texturaCielo = iluminador.fromEquirectangular(texture);
+    //escena.background = texturaCielo.texture;
+    escena.environment = texturaCielo.texture;
+    texture.dispose();
+    iluminador.dispose();
+  });
+}
+
+function aumentarTam() {
+  tamPanuelo += 5;
+  puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
+}
+function reducirTam() {
+  tamPanuelo -= 5;
+  puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
+}
+
+function actualizar() {
+  // console.log("funciona");
+  // console.log(document.getElementById("download"));
+  // var download = document.getElementById("download");
+  // var image = document.getElementById("canvas1").toDataURL("image/png").replace("image/png", "image/octet-stream");
+  // download.setAttribute("href", image);
+  cuenta++;
+  if (cuenta >= lista.length) {
+    cuenta = 0;
+  }
+  cargarModelo(lista[cuenta], puerta);
+  // window.location.reload(true);
+}
+//download.setAttribute("download","archive.png");
+crearActualizacion();
+
+// function tomarFoto() {
+//   const screenshotTarget = document.body;
+//   html2canvas(screenshotTarget).then((canvas) => {
+//     const base64image = canvas.toDataURL("image/png");
+//     window.location.href = base64image;
+//   });
+// }

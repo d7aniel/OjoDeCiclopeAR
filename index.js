@@ -157,7 +157,7 @@ function resizeUpdate() {
 // let particulas = [];
 let puerta = new THREE.Object3D();
 let cuenta = 0;
-let lista = ["./modelo/ventana_mercela_alfa6.glb", "./modelo/piedraArribav3.glb"];
+let listaModelos = ["./modelo/ventana_mercela_alfa6.glb", "./modelo/piedraArribav3.glb"];
 function setupObjects(longitude, latitude) {
   // Use position of first GPS update (fake or real)
   if (first) {
@@ -168,7 +168,7 @@ function setupObjects(longitude, latitude) {
     texto.remove();
   }
 
-  cargarModelo(lista[cuenta], puerta);
+  cargarModelo(listaModelos[cuenta], puerta);
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
   // puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
 
@@ -242,10 +242,25 @@ function setupObjects(longitude, latitude) {
   //     distMin = distancia;
   //     indice = i;
   //   }
-  threex.add(objeto, -57.969982, -34.902403); // slightly north
-  // },
-  threex.add(objeto, -58.278938, -37.89719); // slightly north
-  threex.add(objeto, -58.078047, -34.860122); // slightly north
+  let lista = [
+    { lt: -34.902403, lg: -57.969982 },
+    { lt: -37.89719, lg: -58.278938 },
+    { lt: -34.860122, lg: -58.078047 },
+  ];
+  let distMin = -1;
+  let indice = -1;
+  for (let i = 0; i < lista.length; i++) {
+    let distancia = Math.sqrt(Math.pow(lista[i].lt - latitude, 2) + Math.pow(lista[i].lg - longitude, 2));
+    if (distMin < 0 || distancia < distMin) {
+      distMin = distancia;
+      indice = i;
+    }
+  }
+  threex.add(objeto, lista[indice].lg, lista[indice].lt); // slightly north
+  // threex.add(objeto, -57.969982, -34.902403); // slightly north
+  // // },
+  // threex.add(objeto, -58.278938, -37.89719); // slightly north
+  // threex.add(objeto, -58.078047, -34.860122); // slightly north
   // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   // const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 });
   // const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
@@ -275,8 +290,13 @@ function crearActualizacion() {
   a.id = "download";
   let btn = document.createElement("button");
   btn.type = "button";
-  btn.innerText = "Actualizar";
-  btn.addEventListener("click", actualizar);
+  btn.innerText = "Cambiar modelo";
+  btn.addEventListener("click", cambiarModelo);
+
+  let btn4 = document.createElement("button");
+  btn4.type = "button";
+  btn4.innerText = "Actualizar";
+  btn4.addEventListener("click", actualizar);
 
   let btn2 = document.createElement("button");
   btn2.type = "button";
@@ -293,6 +313,7 @@ function crearActualizacion() {
   // };
 
   a.append(btn);
+  a.append(btn4);
   a.append(btn2);
   a.append(btn3);
   document.body.append(a);
@@ -331,18 +352,20 @@ function reducirTam() {
   tamPanuelo -= 5;
   puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
 }
-
 function actualizar() {
+  window.location.reload(true);
+}
+function cambiarModelo() {
   // console.log("funciona");
   // console.log(document.getElementById("download"));
   // var download = document.getElementById("download");
   // var image = document.getElementById("canvas1").toDataURL("image/png").replace("image/png", "image/octet-stream");
   // download.setAttribute("href", image);
   cuenta++;
-  if (cuenta >= lista.length) {
+  if (cuenta >= listaModelos.length) {
     cuenta = 0;
   }
-  cargarModelo(lista[cuenta], puerta);
+  cargarModelo(listaModelos[cuenta], puerta);
   // window.location.reload(true);
 }
 //download.setAttribute("download","archive.png");

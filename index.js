@@ -157,7 +157,7 @@ function resizeUpdate() {
 // let particulas = [];
 let puerta = new THREE.Object3D();
 let cuenta = 0;
-let listaModelos = ["./modelo/ventana_mercela_alfa6.glb", "./modelo/piedraArribav3.glb"];
+let listaModelos = ["./modelo/ventana_mercela_alfa7.glb", "./modelo/piedraArribav3.glb"];
 function setupObjects(longitude, latitude) {
   // Use position of first GPS update (fake or real)
   if (first) {

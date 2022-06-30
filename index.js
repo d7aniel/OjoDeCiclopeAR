@@ -281,10 +281,10 @@ function crearActualizacion() {
   // console.log("creandoooo");
   let a = document.createElement("a");
   a.style.position = "absolute";
-  a.style.top = "40";
+  // a.style.top = "";
   a.style.display = "flex";
   a.style.justifyContent = "center";
-  a.style.bottom = "80px";
+  a.style.bottom = "160px";
   a.style.transform = "absolute";
   a.style.width = "100%";
   a.id = "download";
@@ -313,7 +313,7 @@ function crearActualizacion() {
   // };
 
   a.append(btn);
-  a.append(btn4);
+  // a.append(btn4);
   a.append(btn2);
   a.append(btn3);
   document.body.append(a);

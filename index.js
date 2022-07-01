@@ -246,6 +246,7 @@ function setupObjects(longitude, latitude) {
     { lt: -34.902403, lg: -57.969982 },
     { lt: -37.89719, lg: -58.278938 },
     { lt: -34.860122, lg: -58.078047 },
+    { lt: -34.88294313919044, lg: -58.00682050422973 },
   ];
   let distMin = -1;
   let indice = -1;

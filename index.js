@@ -165,7 +165,7 @@ function setupObjects(longitude, latitude) {
     // t += "Longitud: " + longitude + "\n";
     // t += "Laditude: " + latitude + "\n";
     // texto.setSubtitulo(t);
-    texto.remove();
+    // texto.remove();
   }
 
   cargarModelo(listaModelos[cuenta], puerta);

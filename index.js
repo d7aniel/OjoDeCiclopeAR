@@ -16,7 +16,7 @@ var poss = [
   new THREE.Vector2(0, d),
 ];
 
-let tamPanuelo = 12;
+let tamPanuelo = 70;
 console.log(texto);
 
 function isMobile() {
@@ -98,6 +98,7 @@ if (!isMobile()) {
       }
     }
     lastX = e.clientX;
+    console.log(camera.rotation.y);
   });
 }
 
@@ -155,9 +156,10 @@ function resizeUpdate() {
 }
 
 // let particulas = [];
-let puerta = new THREE.Object3D();
+let modelos = []; //new THREE.Object3D();
 let cuenta = 0;
-let listaModelos = ["./modelo/ventana_mercela_alfa7.glb", "./modelo/piedraArribav3.glb"];
+let listaModelos = ["./modelo/cuadroVacio1.glb"];
+let listaTexturas = ["./imagenes/img1.jpg", "./imagenes/img2.JPG", "./imagenes/img3.JPG", "./imagenes/img4.jpg"];
 function setupObjects(longitude, latitude) {
   // Use position of first GPS update (fake or real)
   if (first) {
@@ -167,86 +169,32 @@ function setupObjects(longitude, latitude) {
     // texto.setSubtitulo(t);
     // texto.remove();
   }
+  let rot = [
+    { x: 0, y: 0, z: 0 },
+    { x: 0, y: Math.PI, z: 0 },
+    { x: 0, y: -Math.PI * 0.5, z: 0 },
+    { x: Math.PI * 0.5, y: 0, z: 0 },
+  ];
 
-  cargarModelo(listaModelos[cuenta], puerta);
-  puerta.scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
+  for (let i = 0; i < listaTexturas.length; i++) {
+    modelos[i] = new THREE.Object3D();
+    cargarModelo(listaModelos[0], listaTexturas[i], modelos[i], rot[i].x, rot[i].y, rot[i].z);
+    modelos[i].scale.set(tamPanuelo, tamPanuelo, tamPanuelo);
+  }
   // puerta.rotation.set(puerta.rotation.x, puerta.rotation.y + 90, puerta.rotation.z);
 
   let objeto = new THREE.Object3D();
-  // for (let i = 0; i < poss.length; i++) {
-  //   let luz1 = new THREE.PointLight(0xffffff, 4, 40);
-  //   let luz2 = new THREE.PointLight(0xffffff, 4, 40);
-  //   luz1.position.set(poss[i].x, 30, poss[i].y);
-  //   luz2.position.set(poss[i].x, -30, poss[i].y);
-  //   const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  //   const material2 = new THREE.MeshBasicMaterial({ color: 0xff00ff });
-  //   let punto = new THREE.Mesh(geom, material);
-  //   let punto2 = new THREE.Mesh(geom, material2);
-  //   punto.position.set(poss[i].x, 30, poss[i].y);
-  //   punto2.position.set(poss[i].x, -30, poss[i].y);
-  //   objeto.add(luz1);
-  //   objeto.add(luz2);
-  //   objeto.add(punto);
-  //   objeto.add(punto2);
-  // }
 
-  // for (let i = 0; i < 360; i += 60) {
-  //   let luz1 = new THREE.PointLight(0xffffff, 4, 35);
-  //   let luz2 = new THREE.PointLight(0xffffff, 4, 35);
-  //   let luz3 = new THREE.PointLight(0xffffff, 4, 35);
-  //   let luz4 = new THREE.PointLight(0xffffff, 4, 35);
-  //   let x = 60 * Math.cos(THREE.MathUtils.degToRad(i));
-  //   let y = 60 * Math.sin(THREE.MathUtils.degToRad(i));
-  //   let x2 = 30 * Math.cos(THREE.MathUtils.degToRad(i));
-  //   let y2 = 30 * Math.sin(THREE.MathUtils.degToRad(i));
-  //   // const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  //   // const material2 = new THREE.MeshBasicMaterial({ color: 0xff00ff });
-  //   luz1.position.set(x, 30, y);
-  //   luz2.position.set(x, -30, y);
-  //   luz3.position.set(x2, 30, y2);
-  //   luz4.position.set(x2, -30, y2);
-  //   // let punto = new THREE.Mesh(geom, material);
-  //   // let punto2 = new THREE.Mesh(geom, material2);
-  //   // let punto3 = new THREE.Mesh(geom, material2);
-  //   // let punto4 = new THREE.Mesh(geom, material);
-  //   // punto.position.set(x, 30, y);
-  //   // punto2.position.set(x, -30, y);
-  //   // punto3.position.set(x2, 30, y2);
-  //   // punto4.position.set(x2, -30, y2);
-  //   objeto.add(luz1);
-  //   objeto.add(luz2);
-  //   objeto.add(luz3);
-  //   objeto.add(luz4);
-  //   // objeto.add(punto);
-  //   // objeto.add(punto2);
-  //   // objeto.add(punto3);
-  //   // objeto.add(punto4);
-  // }
+  for (let i = 0; i < modelos.length; i++) {
+    objeto.add(modelos[i]);
+  }
 
-  // // const light = new THREE.AmbientLight(0x909090); // soft white light
-  // // objeto.add(light);
-  // const lightHemi = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.8);
-  // objeto.add(lightHemi);
-  // let cant = 10;
-  // for (let i = 0; i < cant; i++) {
-  //   particulas[i] = new Particula();
-  //   objeto.add(particulas[i].modelo);
-  // }
-  objeto.add(puerta);
-
-  // let distMin = -1;
-  // let indice = -1;
-  // for (let i = 0; i < lista.length; i++) {
-  //   let distancia = Math.sqrt(Math.pow(lista[i].lt - latitude, 2) + Math.pow(lista[i].lg - longitude, 2));
-  //   if (distMin < 0 || distancia < distMin) {
-  //     distMin = distancia;
-  //     indice = i;
-  //   }
   let lista = [
     { lt: -34.902403, lg: -57.969982 },
+    { lt: -34.9031455, lg: -57.9682734 },
     { lt: -37.89719, lg: -58.278938 },
     { lt: -34.860122, lg: -58.078047 },
-    { lt: -34.88294313919044, lg: -58.00682050422973 },
+    // { lt: -34.88294313919044, lg: -58.00682050422973 },
   ];
   let distMin = -1;
   let indice = -1;
@@ -257,7 +205,19 @@ function setupObjects(longitude, latitude) {
       indice = i;
     }
   }
-  threex.add(objeto, lista[indice].lg, lista[indice].lt); // slightly north
+  let offset = [
+    { x: 0, y: oneDegAsRad * 0.15, z: 0 },
+    { x: 0, y: oneDegAsRad * -0.15, z: 0 },
+    { x: oneDegAsRad * 0.15, y: 0, z: 0 },
+    { x: 0, y: 0, z: 150 },
+  ];
+  // threex.add(objeto, lista[indice].lg + oneDegAsRad, lista[indice].lt);
+  // threex.add(objeto, lista[indice].lg - oneDegAsRad, lista[indice].lt);
+  for (let i = 0; i < offset.length; i++) {
+    threex.add(modelos[i], lista[indice].lg + offset[i].x, lista[indice].lt + offset[i].y, offset[i].z);
+  }
+  // threex.add(objeto, lista[indice].lg, lista[indice].lt - oneDegAsRad);
+
   // threex.add(objeto, -57.969982, -34.902403); // slightly north
   // // },
   // threex.add(objeto, -58.278938, -37.89719); // slightly north
@@ -370,7 +330,7 @@ function cambiarModelo() {
   // window.location.reload(true);
 }
 //download.setAttribute("download","archive.png");
-crearActualizacion();
+// crearActualizacion();
 
 // function tomarFoto() {
 //   const screenshotTarget = document.body;

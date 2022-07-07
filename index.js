@@ -189,6 +189,7 @@ function setupObjects(longitude, latitude) {
   }
 
   let lista = [
+    { lt: -34.910839, lg: -57.950701 },
     { lt: -34.902403, lg: -57.969982 },
     { lt: -34.9031455, lg: -57.9682734 },
     { lt: -37.89719, lg: -58.278938 },

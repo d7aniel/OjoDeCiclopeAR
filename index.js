@@ -98,7 +98,6 @@ if (!isMobile()) {
       }
     }
     lastX = e.clientX;
-    console.log(camera.rotation.y);
   });
 }
 
@@ -328,6 +327,17 @@ function cambiarModelo() {
   }
   cargarModelo(listaModelos[cuenta], puerta);
   // window.location.reload(true);
+}
+
+function fullScreen() {
+  var goFS = document.getElementById("goFS");
+  goFS.addEventListener(
+    "click",
+    function () {
+      document.body.requestFullscreen();
+    },
+    false
+  );
 }
 //download.setAttribute("download","archive.png");
 // crearActualizacion();

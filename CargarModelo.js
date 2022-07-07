@@ -36,7 +36,6 @@ export function cargarModelo(archivo, texturaArchivo, objetoVacio, rotX, rotY, r
           map: texture,
         });
         for (let obj of gltf.scene.children) {
-          console.log(obj);
           if (obj.name === "capa1") {
             obj.material = capa1;
           }
